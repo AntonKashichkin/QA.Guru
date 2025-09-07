@@ -1,0 +1,17 @@
+export class Profile {
+    constructor(page) {
+        this.page = page;
+        this.editProfileButton = page.getByRole('link', { name: 'Edit Profile Settings' });
+        this.bioInput = page.getByPlaceholder('Short bio about you');
+        this.UpdateButtom = page.getByRole('button', { name: 'Update Settings' });
+    }
+
+    async editProfile() {
+        await this.editProfileButton.click();
+    }
+
+    async updateProfile() {
+        await this.bioInput.fill('I am QA.GURU student');
+        await this.UpdateButtom.click();
+    }
+}
