@@ -14,4 +14,12 @@ export class Profile {
         await this.bioInput.fill('I am QA.GURU student');
         await this.UpdateButtom.click();
     }
+
+    getUserNameElement(name) {
+        return this.page.getByText(name).nth(1);
+    }
+
+    getBioElement() {
+        return this.page.getByText('I am QA.GURU student');
+    }
 }

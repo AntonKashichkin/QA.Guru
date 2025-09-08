@@ -33,4 +33,12 @@ export class MainPage {
     await this.dropdownMenu.click();
     await this.profileButton.click();
   }
+
+  getAdvertisingElement() {
+    return this.page.getByRole('button', { name: ' реклама' });
+  }
+
+  getConscendoElement() {
+    return this.page.getByRole('button', { name: ' conscendo' });
+  }
 }
