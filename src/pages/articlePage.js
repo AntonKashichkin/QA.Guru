@@ -25,4 +25,12 @@ export class Article {
     await this.publishArticleButton.click();
     return this.article;
   }
+
+  getArticleTextElement(text) {
+    return this.page.getByText(text);
+  }
+
+  getErrorMessage() {
+    return this.page.getByText('Title already exists..');
+  }
 }

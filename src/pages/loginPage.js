@@ -13,4 +13,8 @@ export class Login {
     await this.passwordLoginInput.fill(password);
     await this.signUpButton.click();
   }
+
+  getUserNameElement(name) {
+    return this.page.getByText(name);
+  }
 }

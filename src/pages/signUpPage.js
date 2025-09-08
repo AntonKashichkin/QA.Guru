@@ -22,4 +22,8 @@ export class SignUp {
     await this.signUpButton.click();
     return this.user;
   }
+
+  getUserNameElement(name) {
+    return this.page.getByText(name);
+  }
 }
