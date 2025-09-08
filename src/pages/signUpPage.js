@@ -1,18 +1,15 @@
-import { faker } from '@faker-js/faker';
+import { Helpers } from '../helpers/helpers.js';
 
 export class SignUp {
   constructor(page) {
     this.page = page;
+    this.helpers = new Helpers(page);
+    this.user = this.helpers.user;
+
     this.nameInput = page.getByPlaceholder('Your Name');
     this.emailInput = page.getByPlaceholder('Email');
     this.passwordInput = page.getByPlaceholder('Password');
     this.signUpButton = page.getByRole('button', { name: 'Sign up' });
-
-    this.user = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-    };
   }
 
   async fillRegistrationForm() {
