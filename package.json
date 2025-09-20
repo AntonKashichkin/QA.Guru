@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "testUI": "npx playwright test --ui",
+    "report": "npx playwright show-report",
+    "allureFile": "npx allure generate ./allure-results --single-file --clean",
+    "allureServe": "npx allure serve ./allure-results"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AntonKashichkin/QA.Guru.git"
@@ -20,5 +26,8 @@
     "@faker-js/faker": "^9.9.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.0"
+  },
+  "dependencies": {
+    "allure-playwright": "^3.4.1"
   }
 }

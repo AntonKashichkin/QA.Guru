@@ -1,4 +1,5 @@
 import { Helpers } from '../helpers/helpers.js';
+import { test } from '@playwright/test';
 
 export class SignUp {
   constructor(page) {
@@ -13,17 +14,20 @@ export class SignUp {
   }
 
   async fillRegistrationForm() {
-    await this.nameInput.click();
-    await this.nameInput.fill(this.user.name);
-    await this.emailInput.click();
-    await this.emailInput.fill(this.user.email);
-    await this.passwordInput.click();
-    await this.passwordInput.fill(this.user.password);
-    await this.signUpButton.click();
-    return this.user;
+    return test.step('Fill registration form', async (step) => {
+      await this.nameInput.click();
+      await this.nameInput.fill(this.user.name);
+      await this.emailInput.click();
+      await this.emailInput.fill(this.user.email);
+      await this.passwordInput.click();
+      await this.passwordInput.fill(this.user.password);
+      await this.signUpButton.click();
+      return this.user;
+    });
   }
 
   getUserNameElement(name) {
-    return this.page.getByText(name);
+      return this.page.getByText(name);
+    };
   }
-}
+

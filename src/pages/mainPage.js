@@ -1,3 +1,5 @@
+import { test } from '@playwright/test';
+
 export class MainPage {
   constructor(page) {
     this.page = page;
@@ -11,27 +13,39 @@ export class MainPage {
   }
 
   async clickOnSignUpButton() {
-    await this.signUp.click();
+    return test.step('Go to the registration page', async (step) => {
+      await this.signUp.click();
+    });
   }
 
   async clickOnLoginButton() {
-    await this.login.click();
+    return test.step('Go to the login page', async (step) => {
+      await this.login.click();
+    });
   }
 
   async clickOnNewArticle() {
-    await this.newArticle.click();
+    return test.step('Go to the new article', async (step) => {
+      await this.newArticle.click();
+    });
   }
 
   async clickAdvertising() {
-    await this.advertisingTag.click();
+    return test.step('Click advertising', async (step) => {
+      await this.advertisingTag.click();
+    });
   }
   async clickConscendo() {
-    await this.conscendoTag.click();
+    return test.step('Click conscendo', async (step) => {
+      await this.conscendoTag.click();
+    });
   }
 
   async profileDropdownMenu() {
-    await this.dropdownMenu.click();
-    await this.profileButton.click();
+    return test.step('Forward profile', async (step) => {
+      await this.dropdownMenu.click();
+      await this.profileButton.click();
+    });
   }
 
   getAdvertisingElement() {

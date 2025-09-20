@@ -1,4 +1,5 @@
 import { Helpers } from '../helpers/helpers.js';
+import { test } from '@playwright/test';
 
 export class Article {
   constructor(page) {
@@ -14,16 +15,18 @@ export class Article {
   }
 
   async fillArticleForm(article = this.article) {
-    await this.articleTitle.click();
-    await this.articleTitle.fill(article.title);
-    await this.articleAbout.click();
-    await this.articleAbout.fill(article.about);
-    await this.articleText.click();
-    await this.articleText.fill(article.text);
-    await this.articleTags.click();
-    await this.articleTags.fill(article.tags);
-    await this.publishArticleButton.click();
-    return this.article;
+    return test.step('Fill article form', async (step) => {
+      await this.articleTitle.click();
+      await this.articleTitle.fill(article.title);
+      await this.articleAbout.click();
+      await this.articleAbout.fill(article.about);
+      await this.articleText.click();
+      await this.articleText.fill(article.text);
+      await this.articleTags.click();
+      await this.articleTags.fill(article.tags);
+      await this.publishArticleButton.click();
+      return this.article;
+    });
   }
 
   getArticleTextElement(text) {

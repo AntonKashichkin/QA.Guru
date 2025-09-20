@@ -1,3 +1,5 @@
+import { test } from '@playwright/test';
+
 export class Login {
   constructor(page) {
     this.page = page;
@@ -7,11 +9,13 @@ export class Login {
   }
 
   async fillLoginForm(email, password) {
-    await this.emailLoginInput.click();
-    await this.emailLoginInput.fill(email);
-    await this.passwordLoginInput.click();
-    await this.passwordLoginInput.fill(password);
-    await this.signUpButton.click();
+    return test.step('Fill login form', async (step) => {
+      await this.emailLoginInput.click();
+      await this.emailLoginInput.fill(email);
+      await this.passwordLoginInput.click();
+      await this.passwordLoginInput.fill(password);
+      await this.signUpButton.click();
+    });
   }
 
   getUserNameElement(name) {

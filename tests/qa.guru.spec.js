@@ -1,101 +1,89 @@
 import { test, expect } from '@playwright/test';
-import { MainPage, SignUp, Base, Login, Article, Profile } from '../src/pages/index';
+import { App } from '../src/helpers/appFacade';
 import fs from 'fs';
 
 test.describe('All test for realworld', () => {
   let registeredUser = null;
   let articleDate = null;
-  let mainPage, signUp, base, loginPage, articlePage, profilePage;
-
+  
   test.beforeEach(async ({ page }) => {
-    base = new Base(page);
-    await base.loginToSite();
+    let app = new App(page);
+    await app.base.loginToSite();
   });
 
   test('User registration', async ({ page }) => {
-    mainPage = new MainPage(page);
-    signUp = new SignUp(page);
+    let app = new App(page);
 
-    await mainPage.clickOnSignUpButton();
-    registeredUser = await signUp.fillRegistrationForm();
-    await expect(signUp.getUserNameElement(registeredUser.name)).toBeVisible();
+    await app.mainPage.clickOnSignUpButton();
+    registeredUser = await app.signUp.fillRegistrationForm();
+    
+    await expect(app.signUp.getUserNameElement(registeredUser.name)).toBeVisible();
 
     fs.writeFileSync('user.json', JSON.stringify(registeredUser));
   });
 
   test('User authorization', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await expect(loginPage.getUserNameElement(registeredUser.name)).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await expect(app.loginPage.getUserNameElement(registeredUser.name)).toBeVisible();
   });
 
   test('Create new article - positiv', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
-    articlePage = new Article(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await mainPage.clickOnNewArticle();
-    articleDate = await articlePage.fillArticleForm();
-    await expect(articlePage.getArticleTextElement(articleDate.text)).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await app.mainPage.clickOnNewArticle();
+    articleDate = await app.articlePage.fillArticleForm();
+    await expect(app.articlePage.getArticleTextElement(articleDate.text)).toBeVisible();
   });
 
   test('Create new article - negativ', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
-    articlePage = new Article(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await mainPage.clickOnNewArticle();
-    await articlePage.fillArticleForm(articleDate);
-    await expect(articlePage.getErrorMessage()).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await app.mainPage.clickOnNewArticle();
+    await app.articlePage.fillArticleForm(articleDate);
+    await expect(app.articlePage.getErrorMessage()).toBeVisible();
   });
 
   test('Click popular tags', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
-    articlePage = new Article(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await mainPage.clickAdvertising();
-    await expect(mainPage.getAdvertisingElement()).toBeVisible();
-    await mainPage.clickConscendo();
-    await expect(mainPage.getConscendoElement()).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await app.mainPage.clickAdvertising();
+    await expect(app.mainPage.getAdvertisingElement()).toBeVisible();
+    await app.mainPage.clickConscendo();
+    await expect(app.mainPage.getConscendoElement()).toBeVisible();
   });
 
   test('Check user profile', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
-    profilePage = new Profile(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await mainPage.profileDropdownMenu();
-    await expect(profilePage.getUserNameElement(registeredUser.name)).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await app.mainPage.profileDropdownMenu();
+    await expect(app.profilePage.getUserNameElement(registeredUser.name)).toBeVisible();
   });
 
   test('Edit profile', async ({ page }) => {
     const user = JSON.parse(fs.readFileSync('user.json', 'utf8'));
-    mainPage = new MainPage(page);
-    loginPage = new Login(page);
-    profilePage = new Profile(page);
+    let app = new App(page);
 
-    await mainPage.clickOnLoginButton();
-    await loginPage.fillLoginForm(user.email, user.password);
-    await mainPage.profileDropdownMenu();
-    await profilePage.editProfile();
-    await profilePage.updateProfile();
-    await expect(profilePage.getBioElement()).toBeVisible();
+    await app.mainPage.clickOnLoginButton();
+    await app.loginPage.fillLoginForm(user.email, user.password);
+    await app.mainPage.profileDropdownMenu();
+    await app.profilePage.editProfile();
+    await app.profilePage.updateProfile();
+    await expect(app.profilePage.getBioElement()).toBeVisible();
   });
 });
