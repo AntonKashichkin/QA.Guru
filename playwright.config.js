@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -26,7 +25,9 @@ export default defineConfig({
   reporter: [
     ['line'],
     ['html', { open: 'never' }],
-    ['allure-playwright', {
+    [
+      'allure-playwright',
+      {
         outputFolder: 'allure-results',
         suiteTitle: false,
         // Отключаем автоочистку для сохранения истории

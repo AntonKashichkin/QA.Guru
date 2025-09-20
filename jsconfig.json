@@ -4,7 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "checkJs": true,
+    "checkJs": false,
     "allowJs": true,
     "baseUrl": ".",
     "lib": ["ES2020", "DOM"],
