@@ -1,4 +1,4 @@
-import { MainPage, SignUp, Base, Login, Article, Profile } from '../pages/index';
+import { MainPage, SignUp, Base, Login, Article, Profile } from './index.js';
 
 export class App {
   constructor(page) {
