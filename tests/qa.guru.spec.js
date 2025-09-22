@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../src/helpers/builders/fixsture/index';
+import { test } from '../src/fixture/index.js';
 import fs from 'fs';
 
 test.describe('All test for realworld', () => {
