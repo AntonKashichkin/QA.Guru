@@ -7,7 +7,7 @@ test.describe('All test for realworld', () => {
   let articleDate = null;
 
   test.beforeEach(async ({ webApp }) => {
-    await webApp.base.loginToSite();
+    await webApp.base.open();
   });
 
   test('User registration', async ({ webApp }) => {
@@ -44,7 +44,7 @@ test.describe('All test for realworld', () => {
     await webApp.loginPage.fillLoginForm(user.email, user.password);
     await webApp.mainPage.clickOnNewArticle();
     await webApp.articlePage.fillArticleForm(articleDate);
-    await expect(webApp.articlePage.getErrorMessage()).toBeVisible();
+    await expect(webApp.articlePage.getErrorMessage).toBeVisible();
   });
 
   test('Click popular tags', async ({ webApp }) => {
@@ -53,9 +53,9 @@ test.describe('All test for realworld', () => {
     await webApp.mainPage.clickOnLoginButton();
     await webApp.loginPage.fillLoginForm(user.email, user.password);
     await webApp.mainPage.clickAdvertising();
-    await expect(webApp.mainPage.getAdvertisingElement()).toBeVisible();
+    await expect(webApp.mainPage.getAdvertisingElement).toBeVisible();
     await webApp.mainPage.clickConscendo();
-    await expect(webApp.mainPage.getConscendoElement()).toBeVisible();
+    await expect(webApp.mainPage.getConscendoElement).toBeVisible();
   });
 
   test('Check user profile', async ({ webApp }) => {
@@ -75,6 +75,6 @@ test.describe('All test for realworld', () => {
     await webApp.mainPage.profileDropdownMenu();
     await webApp.profilePage.editProfile();
     await webApp.profilePage.updateProfile();
-    await expect(webApp.profilePage.getBioElement()).toBeVisible();
+    await expect(webApp.profilePage.getBioElement).toBeVisible();
   });
 });
