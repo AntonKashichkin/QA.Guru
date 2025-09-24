@@ -29,5 +29,4 @@ export class SignUp {
   getUserNameElement(name) {
       return this.page.getByText(name);
     };
-  }
-
+}

@@ -12,6 +12,7 @@ export class Article {
     this.articleText = page.getByPlaceholder('Write your article (in markdown)');
     this.articleTags = page.getByPlaceholder('Enter tags');
     this.publishArticleButton = page.getByRole('button', { name: 'Publish Article' });
+    this.getErrorMessage = page.getByText('Title already exists..');
   }
 
   async fillArticleForm(article = this.article) {
@@ -31,9 +32,5 @@ export class Article {
 
   getArticleTextElement(text) {
     return this.page.getByText(text);
-  }
-
-  getErrorMessage() {
-    return this.page.getByText('Title already exists..');
   }
 }

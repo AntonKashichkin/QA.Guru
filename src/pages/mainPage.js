@@ -10,6 +10,8 @@ export class MainPage {
     this.conscendoTag = page.getByRole('button', { name: 'conscendo' });
     this.dropdownMenu = page.locator('.nav-link.dropdown-toggle');
     this.profileButton = page.getByRole('link', { name: 'Profile' });
+    this.getAdvertisingElement = page.getByRole('button', { name: ' реклама' });
+    this.getConscendoElement = page.getByRole('button', { name: ' conscendo' });
   }
 
   async clickOnSignUpButton() {
@@ -46,13 +48,5 @@ export class MainPage {
       await this.dropdownMenu.click();
       await this.profileButton.click();
     });
-  }
-
-  getAdvertisingElement() {
-    return this.page.getByRole('button', { name: ' реклама' });
-  }
-
-  getConscendoElement() {
-    return this.page.getByRole('button', { name: ' conscendo' });
   }
 }
