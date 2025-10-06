@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@5
+        uses: actions/checkout@v5
       - name: Установка Node.js
         uses: actions/setup-node@v5
         with:
