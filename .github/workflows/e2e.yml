@@ -1,0 +1,25 @@
+name: E2E
+# Когда запускаем
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+# Описываем джобы
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@5
+      - name: Установка Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - name: Установка пакетов
+        run: npm i
+      - name: Установка браузеров
+        run: npx playwright install --with-deps
+      - name: Запуск тестов
+        run: npx playwright test 
