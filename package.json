@@ -7,7 +7,7 @@
     "t": "npx playwright test",
     "testUI": "npx playwright test --ui",
     "report": "npx playwright show-report",
-    "allureFile": "npx allure generate ./allure-results --single-file",
+    "allureFile": "npx allure awesome ./allure-results --single-file",
     "allureServe": "npx allure serve ./allure-results"
   },
   "repository": {
