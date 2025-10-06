@@ -25,6 +25,8 @@ jobs:
         run: npx playwright test 
       - name: Запускаем генерацию allure в одном файле
         run: npm run allureFile
+        if: always()
+        continue-on-error: true
 
 # Сохраняе резульитат в Allure
       - uses: actions/upload-artifact@v4
