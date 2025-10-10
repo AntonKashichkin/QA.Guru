@@ -1,24 +1,28 @@
 pipeline {
-   agent any
-   stages {
-      stage('e2e-tests') {
-       steps {
-        nodejs('NodeJS2290'){
-            sh 'npm i'
-            sh 'npx playwright install --with-deps'
-            sh 'npx playwright test'
-         }
-        }
-      }
-      stage('Allure') {
-         steps {
-            allure{
-               [
-                  reportBuildPolicy: 'ALWAYS'
-                  results: ((path: 'allure-results'))
-               ]
+    agent any
+
+    tools {
+        nodejs 'NodeJS2290'
+    }
+
+    stages {
+        stage('Install & Run E2E tests') {
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright install --with-deps'
+                sh 'npx playwright test'
             }
-         }
-      }
-   }
+        }
+
+        stage('Allure Report') {
+            steps {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+                ])
+            }
+        }
+    }
 }
