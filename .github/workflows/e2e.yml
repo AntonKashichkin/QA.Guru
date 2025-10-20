@@ -26,7 +26,6 @@ jobs:
         env:
           STEPS: ${{vars.STEP}}
           SECRET: ${{vars.ENV_SECRET}}
-    
       - name: Запускаем генерацию allure в одном файле
         run: npm run allureFile
         if: always()
