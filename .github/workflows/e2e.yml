@@ -24,8 +24,8 @@ jobs:
       - name: Запуск тестов
         run: npx playwright test 
         env:
-          STEPS: ${{vars.STEP}}
-          SECRET: ${{vars.ENV_SECRET}}
+          STEPS: ${{prod.ENVVARIABLE}}
+          SECRET: ${{prod.ENV_SECRET}}
       - name: Запускаем генерацию allure в одном файле
         run: npm run allureFile
         if: always()
