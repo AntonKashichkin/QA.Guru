@@ -10,3 +10,4 @@ user.json
 /allure-results/
 /allure-report/
 allurerc.mjs
+.env
