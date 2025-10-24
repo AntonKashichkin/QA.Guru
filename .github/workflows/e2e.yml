@@ -23,9 +23,6 @@ jobs:
         run: npx playwright install --with-deps
       - name: Запуск тестов
         run: npx playwright test 
-        env:
-          STEPS: ${{prod.ENVVARIABLE}}
-          SECRET: ${{prod.ENV_SECRET}}
       - name: Запускаем генерацию allure в одном файле
         run: npm run allureFile
         if: always()
